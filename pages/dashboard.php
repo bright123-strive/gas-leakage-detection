@@ -1,5 +1,26 @@
 
 
+<?php  
+
+$conn= new mysqli ("localhost","root","","leakage-detection");
+
+//get sensor data
+
+$sensor_data = "SELECT * FROM sensordata ";
+
+$data=mysqli_query($conn, $sensor_data);
+$row=mysqli_fetch_array($data);
+$flow_meter1=$row['flow_meter1'];
+$flow_meter2=$row['flow_meter2'];
+$gas_sensor=$row['gas_sensor'];
+
+$pressure_diff= $flow_meter1 - $flow_meter2;
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   
@@ -78,35 +99,9 @@
             <span class="nav-link-text ms-1">RTL</span>
           </a>
         </li> -->
+    
         <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/notifications.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">notifications</i>
-            </div>
-            <span class="nav-link-text ms-1">Notifications</span>
-          </a>
-        </li>
-        <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/profile.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">person</i>
-            </div>
-            <span class="nav-link-text ms-1">Profile</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/sign-in.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">login</i>
-            </div>
-            <span class="nav-link-text ms-1">Sign In</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/sign-up.html">
+          <a class="nav-link text-white " href="../pages/sign-up.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">assignment</i>
             </div>
@@ -129,7 +124,7 @@
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Flow Meter 1</p>
-                <h4 class="mb-0">400 ml</h4>
+                <h4 id="flow_meter1" class="mb-0"></h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -146,7 +141,7 @@
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">flow meter 2</p>
-                <h4 class="mb-0">500 ml</h4>
+                <h4  id= "flow_meter2" class="mb-0"></h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -163,7 +158,7 @@
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Gas Sensor</p>
-                <h4 class="mb-0">50 </h4>
+                <h4 id ="gas_sensor"  class="mb-0"></h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -180,7 +175,7 @@
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">flow meter diff</p>
-                <h4 class="mb-0">-430</h4>
+                <h4 id="pressure_diff" class="mb-0"></h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -514,6 +509,31 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
+  <script>
+    // Function to update the content of the specified element with new data
+    function updateContent() {
+        // Send an AJAX request to the PHP script to fetch the actual data
+        fetch('sensor_data.php')
+            .then(response => response.json())
+            .then(data => {
+                // Update the specified HTML elements with the received data
+                document.getElementById('flow_meter1').textContent = data.flow_meter1;
+                document.getElementById('flow_meter2').textContent = data.flow_meter2;
+                document.getElementById('gas_sensor').textContent = data.gas_sensor;
+                document.getElementById('pressure_diff').textContent = data.pressure_diff;
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    }
+
+    // Initial call to fetch and update data
+    updateContent();
+
+    // Refresh the content every 1 second
+    setInterval(updateContent, 1000);
+
+</script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->

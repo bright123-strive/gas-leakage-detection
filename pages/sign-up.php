@@ -1,4 +1,47 @@
 
+
+
+
+
+<?php
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST["fullname"];
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    
+
+    // Create a database connection and insert data into the database here
+    // Replace the following placeholders with your actual database credentials
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "leakage-detection";
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }else{
+      echo "connected";
+    }
+
+    // Sanitize and validate user input as needed
+
+    // Insert data into the database
+    $sql = "INSERT INTO users (fullname, email, password,) VALUES ('$name', '$email', '$password')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Registration successful!";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $conn->close();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,7 +85,7 @@
         <div class="container">
           <div class="row">
             <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
-              <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center" style="background-image: url('../assets/img/illustrations/illustration-signup.jpg'); background-size: cover;">
+              <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center" style="background-image: url('https://www.vodafone.co.uk/newscentre/app/uploads/2021/08/water-leak-shutterstock-768x512.jpg.webp'); background-size: cover;">
               </div>
             </div>
             <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
@@ -52,18 +95,18 @@
                   <p class="mb-0">Enter your email and password to register</p>
                 </div>
                 <div class="card-body">
-                  <form role="form">
+                  <form role="form" action =""  method="post"> 
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Name</label>
-                      <input type="text" class="form-control">
+                      <input type="text" class="form-control" name="fullname">
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Email</label>
-                      <input type="email" class="form-control">
+                      <input type="email" class="form-control" name="email">
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Password</label>
-                      <input type="password" class="form-control">
+                      <input type="password" class="form-control"   name ="password">
                     </div>
                     <div class="form-check form-check-info text-start ps-0">
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
