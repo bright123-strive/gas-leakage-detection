@@ -1,8 +1,8 @@
 <?php
 // Replace with your database connection code using MySQLi
 $servername = "localhost";
-$username = "root";
-$password = "";
+$username = "winnie";
+$password = "winnie";
 $dbname = "leakage-detection";
 
 // Create a MySQLi connection
