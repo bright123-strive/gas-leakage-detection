@@ -29,7 +29,7 @@ if ($result->num_rows > 0) {
         'flow_meter1' => $row['flow_meter1'],
         'flow_meter2' => $row['flow_meter2'],
         'gas_sensor' => $row['gas_sensor'],
-        'pressure_diff' => $pressure_diff
+        'pressure_diff' => round($pressure_diff,2)
     );
 
     // Set the response content type to JSON
