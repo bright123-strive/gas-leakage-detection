@@ -2,19 +2,19 @@
 
 <?php  
 
-$conn= new mysqli ("localhost","root","","leakage-detection");
+// $conn= new mysqli ("localhost","root","","leakage-detection");
 
-//get sensor data
+// //get sensor data
 
-$sensor_data = "SELECT * FROM sensor_data ";
+// $sensor_data = "SELECT * FROM sensor_data ";
 
-$data=mysqli_query($conn, $sensor_data);
-$row=mysqli_fetch_array($data);
-$flow_meter1=$row['flow_meter1'];
-$flow_meter2=$row['flow_meter2'];
-$gas_sensor=$row['gas_sensor'];
+// $data=mysqli_query($conn, $sensor_data);
+// $row=mysqli_fetch_array($data);
+// $flow_meter1=$row['flow_meter1'];
+// $flow_meter2=$row['flow_meter2'];
+// $gas_sensor=$row['gas_sensor'];
 
-$pressure_diff= $flow_meter1 - $flow_meter2;
+// $pressure_diff= $flow_meter1 - $flow_meter2;
 
 
 
