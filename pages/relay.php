@@ -182,6 +182,7 @@ input:checked + .slider:before {
     <p> control </p>
   <input type="checkbox"   id="relayToggle" onchange="toggleRelay(this)" >
   <span class="slider round"></span>
+  <p id="relayStatus">Status: Off</p> 
 </label>
 </form>
 
@@ -189,13 +190,16 @@ input:checked + .slider:before {
       <script>
     function toggleRelay(checkbox) {
         var xhr = new XMLHttpRequest();
+        var getStatus=document.getElementById('relayStatus');
         if (checkbox.checked) {
             // Turn the relay on
             xhr.open("GET", "control_relay.php?action=on", true);
+            getStatus.innerHTML = "Status: On";
             console.log("turned on");
         } else {
             // Turn the relay off
             xhr.open("GET", "control_relay.php?action=off", true);
+            getStatus.innerHTML = "Status: off";
             console.log("turned off");
         }
          if(xhr.send())
