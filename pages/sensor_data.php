@@ -1,8 +1,8 @@
 <?php
 // Replace with your database connection code using MySQLi
 $servername = "localhost";
-$username = "root";
-$password = "";
+$username = "winnie";
+$password = "winnie";
 $dbname = "leakage-detection";
 
 // Create a MySQLi connection
@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 }
 
 // Query to fetch data from the sensor_data table
-$sql = "SELECT flow_meter1, flow_meter2, gas_sensor FROM sensordata";
+$sql = "SELECT flow_meter1, flow_meter2, gas_sensor FROM sensor_data";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
