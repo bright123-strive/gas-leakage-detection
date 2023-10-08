@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 }
 
 // Query to fetch data from the sensor_data table
-$sql = "SELECT flow_meter1, flow_meter2, gas_sensor FROM sensor_data";
+$sql = "SELECT flow_meter1, flow_meter2, gas_sensor FROM sensordata";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -38,7 +38,7 @@ if ($result->num_rows > 0) {
     // Output the data as JSON
     echo json_encode($data);
 } else {
-    echo "No data found";
+    echo "No data found".mysqli_error($conn);
 }
 
 // Close the database connection
