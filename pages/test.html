@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Alert with Sound</title>
+</head>
+<body>
+
+<button onclick="playAlert()">Trigger Alert</button>
+
+<script>
+function playAlert() {
+    // Create an audio element
+    var audio = new Audio('alert.mp3'); // Replace 'alert.mp3' with your sound file
+
+    // Play the audio
+    audio.play();
+
+    // Display an alert
+    window.alert('Alert: Something important happened!');
+}
+</script>
+
+</body>
+</html>

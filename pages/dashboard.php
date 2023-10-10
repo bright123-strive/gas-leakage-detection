@@ -188,7 +188,7 @@
               </div>
             </div>
             <div class="card-body">
-              <h6 class="mb-0 ">Gas preasure review</h6>
+              <h6 class="mb-0 ">Gas Concentration</h6>
               <p class="text-sm ">Last High Value</p>
               <hr class="dark horizontal">
               <div class="d-flex ">
@@ -334,7 +334,7 @@
       data: {
         labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         datasets: [{
-          label: "Mobile apps",
+          label: "Gas",
           tension: 0,
           borderWidth: 0,
           pointRadius: 5,
@@ -417,7 +417,7 @@
       data: {
         labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         datasets: [{
-          label: "Mobile apps",
+          label: "Liquid",
           tension: 0,
           borderWidth: 0,
           pointRadius: 5,
@@ -503,21 +503,58 @@
   </script>
   <script>
     // Function to update the content of the specified element with new data
+    // function updateContent() {
+    //     // Send an AJAX request to the PHP script to fetch the actual data
+    //     fetch('sensor_data.php')
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             // Update the specified HTML elements with the received data
+    //             document.getElementById('flow_meter1').textContent = data.flow_meter1;
+    //             document.getElementById('flow_meter2').textContent = data.flow_meter2;
+    //             document.getElementById('gas_sensor').textContent = data.gas_sensor;
+    //             document.getElementById('pressure_diff').textContent = data.pressure_diff;
+    //             var data_diff=  document.getElementById('pressure_diff').textContent = data.pressure_diff;
+    //             console.log(data_diff);
+
+
+    //         })
+    //         .catch(error => {
+    //             console.error('Error fetching data:', error);
+    //         });
+    // }
     function updateContent() {
-        // Send an AJAX request to the PHP script to fetch the actual data
-        fetch('sensor_data.php')
-            .then(response => response.json())
-            .then(data => {
-                // Update the specified HTML elements with the received data
-                document.getElementById('flow_meter1').textContent = data.flow_meter1;
-                document.getElementById('flow_meter2').textContent = data.flow_meter2;
-                document.getElementById('gas_sensor').textContent = data.gas_sensor;
-                document.getElementById('pressure_diff').textContent = data.pressure_diff;
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
-    }
+    // Send an AJAX request to the PHP script to fetch the actual data
+    fetch('sensor_data.php')
+        .then(response => response.json())
+        .then(data => {
+            // Update the specified HTML elements with the received data
+            document.getElementById('flow_meter1').textContent = data.flow_meter1;
+            document.getElementById('flow_meter2').textContent = data.flow_meter2;
+            document.getElementById('gas_sensor').textContent = data.gas_sensor;
+            document.getElementById('pressure_diff').textContent = data.pressure_diff;
+            
+            // Get the value of gas_sensor and convert it to a number
+            var gas_sensor_value = parseFloat(data.gas_sensor);
+            
+            // Check if gas_sensor_value is greater than 5
+            if (gas_sensor_value > 5) {
+                // Show gas leakage alert
+                window.alert('Gas Leakage Detected!');
+            }
+            
+            // Get the value of pressure_diff and convert it to a number
+            var data_diff = parseFloat(data.pressure_diff);
+            
+            // Check if data_diff is greater than 5
+            if (data_diff > 5) {
+                // Show liquid leakage alert
+                window.alert('Liquid Leakage Detected!');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+}
 
     // Initial call to fetch and update data
     updateContent();
