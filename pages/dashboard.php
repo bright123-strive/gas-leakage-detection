@@ -537,7 +537,7 @@
             var gas_sensor_value = parseFloat(data.gas_sensor);
             
             // Check if gas_sensor_value is greater than 5
-            if (gas_sensor_value > 5) {
+            if (gas_sensor_value > 2) {
                 // Show gas leakage alert
                 window.alert('Gas Leakage Detected!');
             }
@@ -546,7 +546,7 @@
             var data_diff = parseFloat(data.pressure_diff);
             
             // Check if data_diff is greater than 5
-            if (data_diff > 5) {
+            if (data_diff > 2) {
                 // Show liquid leakage alert
                 window.alert('Liquid Leakage Detected!');
             }
